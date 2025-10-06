@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import logo from "../assets/logo1.png";
-import { Car, Clock, MapPin, Calendar, Calculator, Phone ,Menu,X} from "lucide-react";
+import { Car, Clock, MapPin, Calendar, Calculator, Phone, Menu, X } from "lucide-react";
 
 const fareRates = {
   standard: {
@@ -97,69 +97,75 @@ const TaxiBookingWebsite = () => {
     setDuration(0);
     setFare(0);
   };
+  const handleClickBook = () => {
+    const el = document.getElementById("bookNowForm");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <div style={{ backgroundColor: "#F3B20E" }} className="min-h-screen">
       {/* Header */}
- <header className="bg-[#F3B20E] text-black py-4 shadow-md">
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        {/* Logo and Brand */}
-        <div className="flex items-center space-x-3">
-          <div className="bg-[#F3B20E] rounded-full w-12 h-12 flex items-center justify-center">
-            <img src={logo} alt="logo" className="h-6 w-6" />
+      <header className="bg-[#F3B20E] text-black py-4 shadow-md">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Logo and Brand */}
+          <div className="flex items-center space-x-2">
+            <div className="bg-[#F3B20E] rounded-full w-12 h-12 flex items-center justify-center">
+              <img src={logo} alt="logo" className=" transform scale-250 h-12 w-12" />
+            </div>
+            <h1 className="text-xl font-bold pl-4 ">BaviSham Taxi</h1>
           </div>
-          <h1 className="text-2xl font-bold">BaviSham Taxi</h1>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-12 text-black font-bold ">
+            <button className=" hover:text-white transition">Home</button>
+            <button className="hover:text-white transition">Services</button>
+            <button className="hover:text-white transition">Pricing</button>
+            <button className="hover:text-white transition">Contact</button>
+          </nav>
+
+          {/* Book Now Button (hidden on small screens) */}
+          <div className="hidden md:block">
+            <button className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition" onClick={handleClickBook}>
+              Book Now
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-12 text-black font-bold ">
-          <button className=" hover:text-white transition">Home</button>
-          <button className="hover:text-white transition">Services</button>
-          <button className="hover:text-white transition">Pricing</button>
-          <button className="hover:text-white transition">Contact</button>
-        </nav>
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-[#F3B20E] text-black px-4 pt-4 pb-6 space-y-4">
+            <button className="block w-full text-left hover:text-white transition">
+              Home
+            </button>
+            <button className="block w-full text-left hover:text-white transition">
+              Services
+            </button>
+            <button className="block w-full text-left hover:text-white transition">
+              Pricing
+            </button>
+            <button className="block w-full text-left hover:text-white transition">
+              Contact
+            </button>
 
-        {/* Book Now Button (hidden on small screens) */}
-        <div className="hidden md:block">
-          <button className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
-            Book Now
-          </button>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-[#F3B20E] text-black px-4 pt-4 pb-6 space-y-4">
-          <button className="block w-full text-left hover:text-white transition">
-            Home
-          </button>
-          <button className="block w-full text-left hover:text-white transition">
-            Services
-          </button>
-          <button className="block w-full text-left hover:text-white transition">
-            Pricing
-          </button>
-          <button className="block w-full text-left hover:text-white transition">
-            Contact
-          </button>
-
-          <button className="w-full bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
-            Book Now
-          </button>
-        </div>
-      )}
-    </header>
+            <button className="w-full bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition" onClick={handleClickBook}>
+              Book Now
+            </button>
+          </div>
+        )}
+      </header>
 
       {/* Add padding-top so page content isn't hidden */}
-      
+
 
 
 
@@ -182,8 +188,8 @@ const TaxiBookingWebsite = () => {
 
       <section className="container mx-auto px-4 py-12 -mt-16">
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-800">Book a Taxi</h3>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <h3 className="text-2xl font-bold mb-6 text-gray-800 text-center">Book a Taxi</h3>
+          <form onSubmit={handleSubmit} className="space-y-6" id="bookNowForm">
             {/* Name & Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Name */}
@@ -399,7 +405,7 @@ const TaxiBookingWebsite = () => {
                 <div className="border-t border-gray-300 pt-2 mt-2">
                   <div className="flex justify-between font-bold text-lg">
                     <span>Total:</span>
-                    <span>${fare.toFixed(2)}</span>
+                    <span>{currencySymbol}{" "}{fare.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
