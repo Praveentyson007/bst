@@ -127,7 +127,7 @@ const TaxiBookingWebsite = () => {
 
           {/* Book Now Button (hidden on small screens) */}
           <div className="hidden md:block">
-            <button className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition" onClick={handleClickBook}>
+            <button className="bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-sandal-100  transition" onClick={handleClickBook}>
               Book Now
             </button>
           </div>
@@ -302,7 +302,7 @@ const TaxiBookingWebsite = () => {
 
             {/* Vehicle Type */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className=" text-sm font-medium text-gray-700 mb-2">
                 Vehicle Type
               </label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -311,21 +311,24 @@ const TaxiBookingWebsite = () => {
                     id: "standard",
                     label: "Standard",
                     price: currencySymbol + " " + fareRates.standard.perKm,
+                    capacity: "4 Passengeer"
                   },
                   {
                     id: "premium",
                     label: "Premium",
                     price: currencySymbol + " " + fareRates.premium.perKm,
+                    capacity: "6 Passengeer"
                   },
                   {
                     id: "suv",
                     label: "SUV",
                     price: currencySymbol + " " + fareRates.suv.perKm,
+                    capacity: "9 Passengeer"
                   },
                 ].map((vehicle) => (
                   <div
                     key={vehicle.id}
-                    className={`border rounded-lg p-4 cursor-pointer transition-all ${vehicleType === vehicle.id
+                    className={`border rounded-lg p-1 cursor-pointer transition-all ${vehicleType === vehicle.id
                       ? "border-blue-500 bg-blue-50"
                       : "border-gray-300 hover:border-blue-300"
                       }`}
@@ -333,8 +336,12 @@ const TaxiBookingWebsite = () => {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="font-medium">{vehicle.label}</h4>
-                        <p className="text-sm text-gray-600">{vehicle.price}</p>
+
+                        <h4 className="font-medium text-center">{vehicle.label}</h4>
+                        <p className=" text-black-600">{vehicle.price}</p>
+                        <div className="flex justify-center items-center">
+                          <span className="text-sm text-black-500">{vehicle.capacity}</span>
+                        </div>
                       </div>
                       {vehicleType === vehicle.id && (
                         <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
@@ -346,81 +353,25 @@ const TaxiBookingWebsite = () => {
                 ))}
               </div>
             </div>
-
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Distance (km)
-                </label>
-                <input
-                  type="number"
-                  value={distance}
-                  onChange={(e) => setDistance(parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Duration (min)
-                </label>
-                <input
-                  type="number"
-                  value={duration}
-                  onChange={(e) => setDuration(parseInt(e.target.value) || 0)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
-            {/* Fare Calculation */}
-            <div className="bg-blue-50 rounded-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="text-lg font-semibold text-gray-800">Fare Estimate</h4>
-                <Calculator className="h-6 w-6 text-blue-600" />
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span>Base fare:</span>
-                  <span>
-                    {currencySymbol}{" "}{fareRates[vehicleType].base.toFixed(2)}
-                  </span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span>
-                    Distance ({distance} km × {currencySymbol}{" "}
-                    {fareRates[vehicleType].perKm}/km):
-                  </span>
-
-                  <span>{currencySymbol}{" "}{(distance * fareRates[vehicleType].perKm).toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>
-                    Time ({duration} min × {currencySymbol}{" "}
-                    {fareRates[vehicleType].perMin}/min):
-                  </span>
-                  <span>{currencySymbol}{" "}{(duration * fareRates[vehicleType].perMin).toFixed(2)}</span>
-                </div>
-                <div className="border-t border-gray-300 pt-2 mt-2">
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Total:</span>
-                    <span>{currencySymbol}{" "}{fare.toFixed(2)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:bg-yellow-700 transition"
+              className="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:#F3B20E transition"
             >
               Book Now - {currencySymbol}{" "}{fare.toFixed(2)}
             </button>
+
+
+
+            {/* Submit Button */}
+
           </form>
+
         </div>
       </section>
+      {/* --------------------->>>>>>>>>>>>>>>>>> */}
+
+
+
 
       {/* Car Showcase Section */}
       <section className="container mx-auto px-4 py-12">
@@ -443,6 +394,7 @@ const TaxiBookingWebsite = () => {
             <div className="p-6">
               <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">Standard Sedan</h4>
               <p className="text-gray-600 mb-4 text-center">Comfortable and efficient for everyday travel for your needs</p>
+
               <div className="flex justify-between items-center">
                 <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
                 <span className="text-sm text-gray-500">4 passengers</span>
@@ -634,6 +586,174 @@ const TaxiBookingWebsite = () => {
         </div>
       </section>
 
+      {/* fare calculation seperate box */}
+      <div className="container mx-auto px-4 py-12 -mt-16">
+        
+        {/* Fare Calculation */}
+        <div className="bg-blue-50 rounded-lg p-6">
+          <div className="flex items-center justify-center mb-3">
+            <h4 className="text-lg font-semibold text-gray-800 justify-center">Fare Estimate</h4>
+            <Calculator className="h-6 w-6 text-blue-600" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Distance (km)
+              </label>
+              <input
+                type="number"
+                value={distance}
+                onChange={(e) => setDistance(parseInt(e.target.value) || 0)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Duration (min)
+              </label>
+              <input
+                type="number"
+                value={duration}
+                onChange={(e) => setDuration(parseInt(e.target.value) || 0)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+          <div>
+              <label className=" text-sm font-medium text-gray-700 mb-2">
+                Vehicle Type
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  {
+                    id: "standard",
+                    label: "Standard",
+                    price: currencySymbol + " " + fareRates.standard.perKm,
+                    capacity: "4 Passengeer"
+                  },
+                  {
+                    id: "premium",
+                    label: "Premium",
+                    price: currencySymbol + " " + fareRates.premium.perKm,
+                    capacity: "6 Passengeer"
+                  },
+                  {
+                    id: "suv",
+                    label: "SUV",
+                    price: currencySymbol + " " + fareRates.suv.perKm,
+                    capacity: "9 Passengeer"
+                  },
+                ].map((vehicle) => (
+                  <div
+                    key={vehicle.id}
+                    className={`border rounded-lg p-1 cursor-pointer transition-all ${vehicleType === vehicle.id
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-300 hover:border-blue-300"
+                      }`}
+                    onClick={() => setVehicleType(vehicle.id)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+
+                        <h4 className="font-medium text-center">{vehicle.label}</h4>
+                        <p className=" text-black-600">{vehicle.price}</p>
+                        <div className="flex justify-center items-center">
+                          <span className="text-sm text-black-500">{vehicle.capacity}</span>
+                        </div>
+                      </div>
+                      {vehicleType === vehicle.id && (
+                        <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          {/* <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Vehicle Type
+            </label>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                {
+                  id: "standard",
+                  label: "Standard",
+                  price: currencySymbol + " " + fareRates.standard.perKm,
+                },
+                {
+                  id: "premium",
+                  label: "Premium",
+                  price: currencySymbol + " " + fareRates.premium.perKm,
+                },
+                {
+                  id: "suv",
+                  label: "SUV",
+                  price: currencySymbol + " " + fareRates.suv.perKm,
+                },
+              ].map((vehicle) => (
+                <div
+                  key={vehicle.id}
+                  className={`border rounded-lg p-1 cursor-pointer transition-all ${vehicleType === vehicle.id
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-300 hover:border-blue-300"
+                    }`}
+                  onClick={() => setVehicleType(vehicle.id)}
+                >
+                  <div className="flex items-center justify-center">
+                    <div>
+                      <h4 className="font-medium text-center">{vehicle.label}</h4>
+                      <p className="text-m text-black-600">{vehicle.price}</p>
+                    </div>
+                    {vehicleType === vehicle.id && (
+                      <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div> */}
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <span>Base fare:</span>
+              <span>
+                {currencySymbol}{" "}{fareRates[vehicleType].base.toFixed(2)}
+              </span>
+            </div>
+
+            <div className="flex justify-between">
+              <span>
+                Distance ({distance} km × {currencySymbol}{" "}
+                {fareRates[vehicleType].perKm}/km):
+              </span>
+
+              <span>{currencySymbol}{" "}{(distance * fareRates[vehicleType].perKm).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>
+                Time ({duration} min × {currencySymbol}{" "}
+                {fareRates[vehicleType].perMin}/min):
+              </span>
+              <span>{currencySymbol}{" "}{(duration * fareRates[vehicleType].perMin).toFixed(2)}</span>
+            </div>
+            <div className="border-t border-gray-300 pt-2 mt-2">
+              <div className="flex justify-between font-bold text-lg">
+                <span>Total:</span>
+                <span>{currencySymbol}{" "}{fare.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
       {/* Footer */}
       <footer style={{ backgroundColor: "#F3B20E" }} className="text-black py-12">
         <div className="container mx-auto px-4">
@@ -643,31 +763,15 @@ const TaxiBookingWebsite = () => {
                 <Car className="h-6 w-6 text-gray-600" />
                 <h4 className="text-xl font-bold">BaviSham Taxi</h4>
               </div>
-              <p className="text-black-600">Reliable transportation services since 2010</p>
+              <p className="text-grey-600">Reliable transportation services since 2010</p>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Services</h5>
-              <ul className="space-y-2 text-black">
-                <li>
-
-                  Airport Transfers
-
-                </li>
-                <li>
-
-                  City Rides
-
-                </li>
-                <li>
-
-                  Corporate Travel
-
-                </li>
-                <li>
-
-                  Event Transportation
-
-                </li>
+              <ul className="space-y-2 text-grey">
+                <li>Airport Transfers</li>
+                <li>City Rides</li> 
+                <li>Corporate Travel</li>
+                <li>Event Transportation</li>
               </ul>
             </div>
 
