@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import logo from "../assets/logo1.png";
-import bannerImage from "../assets/bst-img.png";
+
 import {
   Car,
   Clock,
