@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import logo from "../assets/logo1.png";
-import { Car, Clock, MapPin, Calendar, Calculator, Phone, Menu, X } from "lucide-react";
+import bannerImage from "../assets/bst-img.png";
+import {
+  Car,
+  Clock,
+  MapPin,
+  Calendar,
+  Calculator,
+  Phone,
+  Menu,
+  X,
+} from "lucide-react";
 
 const fareRates = {
-  standard: {
-    base: 14,
-    perKm: 14,
+  hatchback: {
+    base: 13,
+    perKm: 13,
     perMin: 0.3,
   },
-  premium: {
-    base: 17,
-    perKm: 17,
+  sedan: {
+    base: 14,
+    perKm: 14,
     perMin: 0.4,
   },
   suv: {
-    base: 21,
-    perKm: 21,
+    base: 17,
+    perKm: 17,
     perMin: 0.5,
   },
 };
-
-
 
 const TaxiBookingWebsite = () => {
   const [name, setName] = useState("");
@@ -30,18 +38,13 @@ const TaxiBookingWebsite = () => {
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [vehicleType, setVehicleType] = useState("standard");
+  const [vehicleType, setVehicleType] = useState("hatchback");
   const [distance, setDistance] = useState(0);
   const [duration, setDuration] = useState(0);
   const [fare, setFare] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const currencySymbol = "\u20B9";
-
-
-
-
-
 
   // Calculate fare whenever inputs change
   useEffect(() => {
@@ -50,7 +53,8 @@ const TaxiBookingWebsite = () => {
       setFare(0);
       return;
     }
-    const calculatedFare = rate.base + distance * rate.perKm + duration * rate.perMin;
+    const calculatedFare =
+      rate.base + distance * rate.perKm + duration * rate.perMin;
     setFare(parseFloat(calculatedFare.toFixed(2)));
   }, [distance, duration, vehicleType]);
 
@@ -112,7 +116,11 @@ const TaxiBookingWebsite = () => {
           {/* Logo and Brand */}
           <div className="flex items-center space-x-2">
             <div className="bg-[#F3B20E] rounded-full w-12 h-12 flex items-center justify-center">
-              <img src={logo} alt="logo" className=" transform scale-250 h-12 w-12" />
+              <img
+                src={logo}
+                alt="logo"
+                className=" transform scale-250 h-12 w-12"
+              />
             </div>
             <h1 className="text-xl font-bold pl-4 ">BaviSham Taxi</h1>
           </div>
@@ -127,7 +135,10 @@ const TaxiBookingWebsite = () => {
 
           {/* Book Now Button (hidden on small screens) */}
           <div className="hidden md:block">
-            <button className="bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-sandal-100  transition" onClick={handleClickBook}>
+            <button
+              className="bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-sandal-100  transition"
+              onClick={handleClickBook}
+            >
               Book Now
             </button>
           </div>
@@ -157,7 +168,10 @@ const TaxiBookingWebsite = () => {
               Contact
             </button>
 
-            <button className="w-full bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition" onClick={handleClickBook}>
+            <button
+              className="w-full bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition"
+              onClick={handleClickBook}
+            >
               Book Now
             </button>
           </div>
@@ -165,9 +179,6 @@ const TaxiBookingWebsite = () => {
       </header>
 
       {/* Add padding-top so page content isn't hidden */}
-
-
-
 
       {/* Banner Image */}
       <section className="w-full h-48 md:h-64 overflow-hidden">
@@ -179,16 +190,23 @@ const TaxiBookingWebsite = () => {
       </section>
 
       {/* Hero Section */}
-      <section style={{ backgroundColor: "#F3B20E" }} className="text-black py-16">
+      <section
+        style={{ backgroundColor: "#F3B20E" }}
+        className="text-black py-16"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">Book Your Ride in Seconds</h2>
-          <p className="text-xl mb-8">Fast, reliable taxi service at your fingertips</p>
+          <p className="text-xl mb-8">
+            Fast, reliable taxi service at your fingertips
+          </p>
         </div>
       </section>
 
       <section className="container mx-auto px-4 py-12 -mt-16">
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-gray-800 text-center">Book a Taxi</h3>
+          <h3 className="text-2xl font-bold mb-6 text-gray-800 text-center">
+            Book a Taxi
+          </h3>
           <form onSubmit={handleSubmit} className="space-y-6" id="bookNowForm">
             {/* Name & Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -308,39 +326,43 @@ const TaxiBookingWebsite = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   {
-                    id: "standard",
-                    label: "Standard",
-                    price: currencySymbol + " " + fareRates.standard.perKm,
-                    capacity: "4 Passengeer"
+                    id: "hatchback",
+                    label: "Hatchback",
+                    price: currencySymbol + " " + fareRates.hatchback.perKm,
+                    capacity: "4 Passengeer",
                   },
                   {
-                    id: "premium",
-                    label: "Premium",
-                    price: currencySymbol + " " + fareRates.premium.perKm,
-                    capacity: "6 Passengeer"
+                    id: "sedan",
+                    label: "Sedan",
+                    price: currencySymbol + " " + fareRates.sedan.perKm,
+                    capacity: "4 Passengeer",
                   },
                   {
                     id: "suv",
                     label: "SUV",
                     price: currencySymbol + " " + fareRates.suv.perKm,
-                    capacity: "9 Passengeer"
+                    capacity: "6 Passengeer",
                   },
                 ].map((vehicle) => (
                   <div
                     key={vehicle.id}
-                    className={`border rounded-lg p-1 cursor-pointer transition-all ${vehicleType === vehicle.id
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-300 hover:border-blue-300"
-                      }`}
+                    className={`border rounded-lg p-1 cursor-pointer transition-all ${
+                      vehicleType === vehicle.id
+                        ? "border-blue-500 bg-blue-50"
+                        : "border-gray-300 hover:border-blue-300"
+                    }`}
                     onClick={() => setVehicleType(vehicle.id)}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-
-                        <h4 className="font-medium text-center">{vehicle.label}</h4>
+                        <h4 className="font-medium text-center">
+                          {vehicle.label}
+                        </h4>
                         <p className=" text-black-600">{vehicle.price}</p>
                         <div className="flex justify-center items-center">
-                          <span className="text-sm text-black-500">{vehicle.capacity}</span>
+                          <span className="text-sm text-black-500">
+                            {vehicle.capacity}
+                          </span>
                         </div>
                       </div>
                       {vehicleType === vehicle.id && (
@@ -357,32 +379,27 @@ const TaxiBookingWebsite = () => {
               type="submit"
               className="w-full bg-yellow-600 text-white py-3 rounded-lg font-semibold hover:#F3B20E transition"
             >
-              Book Now - {currencySymbol}{" "}{fare.toFixed(2)}
+              Book Now - {currencySymbol} {fare.toFixed(2)}
             </button>
 
-
-
             {/* Submit Button */}
-
           </form>
-
         </div>
       </section>
       {/* --------------------->>>>>>>>>>>>>>>>>> */}
 
-
-
-
       {/* Car Showcase Section */}
       <section className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-gray-800 mb-4">Our Modern Fleet</h3>
+          <h3 className="text-3xl font-bold text-gray-800 mb-4">
+            Our Modern Fleet
+          </h3>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Experience comfort and reliability with our well-maintained vehicles
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Standard Sedan */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {/* hatchback Sedan */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="h-48 overflow-hidden">
               <img
@@ -392,11 +409,17 @@ const TaxiBookingWebsite = () => {
               />
             </div>
             <div className="p-6">
-              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">Standard Sedan</h4>
-              <p className="text-gray-600 mb-4 text-center">Comfortable and efficient for everyday travel for your needs</p>
+              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">
+                HatchBack
+              </h4>
+              <p className="text-gray-600 mb-4 text-center">
+                Comfortable and efficient for everyday travel for your needs
+              </p>
 
               <div className="flex justify-between items-center">
-                <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
+                <span className="text-blue-600 font-bold">
+                  {currencySymbol + " 13"}
+                </span>
                 <span className="text-sm text-gray-500">4 passengers</span>
               </div>
             </div>
@@ -412,12 +435,16 @@ const TaxiBookingWebsite = () => {
               />
             </div>
             <div className="p-6">
-              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">Premium Luxury</h4>
+              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">
+                Premium Sedan
+              </h4>
               <p className="text-gray-600 mb-4 text-center">
                 Executive comfort for business or special occasions
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
+                <span className="text-blue-600 font-bold">
+                  {currencySymbol + " 14"}
+                </span>
                 <span className="text-sm text-gray-500">4 passengers</span>
               </div>
             </div>
@@ -434,19 +461,23 @@ const TaxiBookingWebsite = () => {
               />
             </div>
             <div className="p-6">
-              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">SUV</h4>
+              <h4 className="text-xl font-semibold text-gray-800 text-center mb-2">
+                Premium SUV
+              </h4>
               <p className="text-gray-600 mb-4 text-center">
                 Perfect for groups and airport transfers with luggage
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
+                <span className="text-blue-600 font-bold">
+                  {currencySymbol + " 17"}
+                </span>
                 <span className="text-sm text-gray-500">6 passengers</span>
               </div>
             </div>
           </div>
 
           {/* Electric Vehicle */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="h-48 overflow-hidden">
               <img
                 src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/40cfac20-9130-404c-8d82-524b284d1708.png"
@@ -462,7 +493,7 @@ const TaxiBookingWebsite = () => {
                 <span className="text-sm text-gray-500">4 passengers</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Minivan */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
@@ -474,17 +505,23 @@ const TaxiBookingWebsite = () => {
               />
             </div>
             <div className="p-6">
-              <h4 className="text-xl font-semibold text-gray-800 mb-2 text-center">Minivan</h4>
-              <p className="text-gray-600 mb-4 text-center">Ideal for large families and group travel</p>
+              <h4 className="text-xl font-semibold text-gray-800 mb-2 text-center">
+                Traveller
+              </h4>
+              <p className="text-gray-600 mb-4 text-center">
+                Ideal for large families and group travel
+              </p>
               <div className="flex justify-between items-center">
-                <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
+                <span className="text-blue-600 font-bold">
+                  {currencySymbol + " 25"}
+                </span>
                 <span className="text-sm text-gray-500">8 passengers</span>
               </div>
             </div>
           </div>
 
           {/* Luxury Van */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          {/* <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
             <div className="h-48 overflow-hidden">
               <img
                 src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73aaa223-180b-42ef-af12-1f77eb4fbf95.png"
@@ -493,94 +530,60 @@ const TaxiBookingWebsite = () => {
               />
             </div>
             <div className="p-6">
-              <h4 className="text-xl font-semibold text-gray-800 mb-2 text-center">Luxury Van</h4>
+              <h4 className="text-xl font-semibold text-gray-800 mb-2 text-center">
+                Luxury Van
+              </h4>
               <p className="text-gray-600 mb-4 text-center">
                 Ultimate comfort for corporate events and weddings
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-blue-600 font-bold">{currencySymbol + " 25"}</span>
+                <span className="text-blue-600 font-bold">
+                  {currencySymbol + " 25"}
+                </span>
                 <span className="text-sm text-gray-500">6 passengers</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* ----------------------------------------------------------------------------------------------------------- */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* ----------------------------------------------------------------------------------------------------------- */}
       {/* Features Section */}
       <section style={{ backgroundColor: "#F3B20E" }} className="py-16">
         <div className="container mx-auto px-4">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Us</h3>
+          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Why Choose Us
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="h-8 w-8 text-blue-600" />
               </div>
               <h4 className="font-semibold text-lg mb-2">24/7 Availability</h4>
-              <p className="text-black-600">Round-the-clock service for all your transportation needs</p>
+              <p className="text-black-600">
+                Round-the-clock service for all your transportation needs
+              </p>
             </div>
             <div className="text-center">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Car className="h-8 w-8 text-blue-600" />
               </div>
               <h4 className="font-semibold text-lg mb-2">Modern Fleet</h4>
-              <p className="text-black-600">Clean, comfortable vehicles maintained to highest standards</p>
+              <p className="text-black-600">
+                Clean, comfortable vehicles maintained to highest standards
+              </p>
             </div>
             <div className="text-center">
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calculator className="h-8 w-8 text-blue-600" />
               </div>
-              <h4 className="font-semibold text-lg mb-2">Transparent Pricing</h4>
-              <p className="text-black-600">No hidden fees with upfront fare calculation</p>
+              <h4 className="font-semibold text-lg mb-2">
+                Transparent Pricing
+              </h4>
+              <p className="text-black-600">
+                No hidden fees with upfront fare calculation
+              </p>
             </div>
           </div>
         </div>
@@ -588,11 +591,12 @@ const TaxiBookingWebsite = () => {
 
       {/* fare calculation seperate box */}
       <div className="container mx-auto px-4 py-12 -mt-16">
-        
         {/* Fare Calculation */}
         <div className="bg-blue-50 rounded-lg p-6">
           <div className="flex items-center justify-center mb-3">
-            <h4 className="text-lg font-semibold text-gray-800 justify-center">Fare Estimate</h4>
+            <h4 className="text-lg font-semibold text-gray-800 justify-center">
+              Fare Estimate
+            </h4>
             <Calculator className="h-6 w-6 text-blue-600" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -620,57 +624,61 @@ const TaxiBookingWebsite = () => {
             </div>
           </div>
           <div>
-              <label className=" text-sm font-medium text-gray-700 mb-2">
-                Vehicle Type
-              </label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[
-                  {
-                    id: "standard",
-                    label: "Standard",
-                    price: currencySymbol + " " + fareRates.standard.perKm,
-                    capacity: "4 Passengeer"
-                  },
-                  {
-                    id: "premium",
-                    label: "Premium",
-                    price: currencySymbol + " " + fareRates.premium.perKm,
-                    capacity: "6 Passengeer"
-                  },
-                  {
-                    id: "suv",
-                    label: "SUV",
-                    price: currencySymbol + " " + fareRates.suv.perKm,
-                    capacity: "9 Passengeer"
-                  },
-                ].map((vehicle) => (
-                  <div
-                    key={vehicle.id}
-                    className={`border rounded-lg p-1 cursor-pointer transition-all ${vehicleType === vehicle.id
+            <label className=" text-sm font-medium text-gray-700 mb-2">
+              Vehicle Type
+            </label>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                {
+                  id: "hatchback",
+                  label: "Hatchback",
+                  price: currencySymbol + " " + fareRates.hatchback.perKm,
+                  capacity: "4 Passengeer",
+                },
+                {
+                  id: "sedan",
+                  label: "Sedan",
+                  price: currencySymbol + " " + fareRates.sedan.perKm,
+                  capacity: "4 Passengeer",
+                },
+                {
+                  id: "suv",
+                  label: "SUV",
+                  price: currencySymbol + " " + fareRates.suv.perKm,
+                  capacity: "6 Passengeer",
+                },
+              ].map((vehicle) => (
+                <div
+                  key={vehicle.id}
+                  className={`border rounded-lg p-1 cursor-pointer transition-all ${
+                    vehicleType === vehicle.id
                       ? "border-blue-500 bg-blue-50"
                       : "border-gray-300 hover:border-blue-300"
-                      }`}
-                    onClick={() => setVehicleType(vehicle.id)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-
-                        <h4 className="font-medium text-center">{vehicle.label}</h4>
-                        <p className=" text-black-600">{vehicle.price}</p>
-                        <div className="flex justify-center items-center">
-                          <span className="text-sm text-black-500">{vehicle.capacity}</span>
-                        </div>
+                  }`}
+                  onClick={() => setVehicleType(vehicle.id)}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-medium text-center">
+                        {vehicle.label}
+                      </h4>
+                      <p className=" text-black-600">{vehicle.price}</p>
+                      <div className="flex justify-center items-center">
+                        <span className="text-sm text-black-500">
+                          {vehicle.capacity}
+                        </span>
                       </div>
-                      {vehicleType === vehicle.id && (
-                        <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                        </div>
-                      )}
                     </div>
+                    {vehicleType === vehicle.id && (
+                      <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          </div>
 
           {/* <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -721,7 +729,7 @@ const TaxiBookingWebsite = () => {
             <div className="flex justify-between">
               <span>Base fare:</span>
               <span>
-                {currencySymbol}{" "}{fareRates[vehicleType].base.toFixed(2)}
+                {currencySymbol} {fareRates[vehicleType].base.toFixed(2)}
               </span>
             </div>
 
@@ -731,31 +739,38 @@ const TaxiBookingWebsite = () => {
                 {fareRates[vehicleType].perKm}/km):
               </span>
 
-              <span>{currencySymbol}{" "}{(distance * fareRates[vehicleType].perKm).toFixed(2)}</span>
+              <span>
+                {currencySymbol}{" "}
+                {(distance * fareRates[vehicleType].perKm).toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span>
                 Time ({duration} min × {currencySymbol}{" "}
                 {fareRates[vehicleType].perMin}/min):
               </span>
-              <span>{currencySymbol}{" "}{(duration * fareRates[vehicleType].perMin).toFixed(2)}</span>
+              <span>
+                {currencySymbol}{" "}
+                {(duration * fareRates[vehicleType].perMin).toFixed(2)}
+              </span>
             </div>
             <div className="border-t border-gray-300 pt-2 mt-2">
               <div className="flex justify-between font-bold text-lg">
                 <span>Total:</span>
-                <span>{currencySymbol}{" "}{fare.toFixed(2)}</span>
+                <span>
+                  {currencySymbol} {fare.toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-
-
-
-
       {/* Footer */}
-      <footer style={{ backgroundColor: "#F3B20E" }} className="text-black py-12">
+      <footer
+        style={{ backgroundColor: "#F3B20E" }}
+        className="text-black py-12"
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -763,13 +778,15 @@ const TaxiBookingWebsite = () => {
                 <Car className="h-6 w-6 text-gray-600" />
                 <h4 className="text-xl font-bold">BaviSham Taxi</h4>
               </div>
-              <p className="text-grey-600">Reliable transportation services since 2010</p>
+              <p className="text-grey-600">
+                Reliable transportation services since 2010
+              </p>
             </div>
             <div>
               <h5 className="font-semibold mb-4">Services</h5>
               <ul className="space-y-2 text-grey">
                 <li>Airport Transfers</li>
-                <li>City Rides</li> 
+                <li>City Rides</li>
                 <li>Corporate Travel</li>
                 <li>Event Transportation</li>
               </ul>
@@ -778,34 +795,20 @@ const TaxiBookingWebsite = () => {
             <div>
               <h5 className="font-semibold mb-4">Support</h5>
               <ul className="space-y-2 text-black">
-                <li>
-
-                  Help Center
-
-                </li>
-                <li>
-
-                  Contact Us
-
-                </li>
-                <li>
-                  FAQs
-                </li>
-                <li>
-
-                  Privacy Policy
-
-                </li>
+                <li>Help Center</li>
+                <li>Contact Us</li>
+                <li>FAQs</li>
+                <li>Privacy Policy</li>
               </ul>
             </div>
 
             <div>
               <h5 className="font-semibold mb-4">Contact</h5>
               <ul className="space-y-2 text-black-600">
-                <li>123 Taxi Street</li>
-                <li>City, State 12345</li>
-                <li>+1 (555) 123-4567</li>
-                <li>info@BaviShamtaxi.com</li>
+                <li>No:409, 4th Street sathya nagar kangeyanallur Road,</li>
+                <li>Vellore 632006.</li>
+                <li>+91 8124474542</li>
+                <li>bavishamtaxi@gmail.com</li>
               </ul>
             </div>
           </div>
@@ -819,4 +822,3 @@ const TaxiBookingWebsite = () => {
 };
 
 export default TaxiBookingWebsite;
-
